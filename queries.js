@@ -1,11 +1,15 @@
 const Pool = require('pg').Pool
+// const pool = new Pool({
+//     user:'dev',
+//     host:'localhost',
+//     database:'liberatti',
+//     password:'root',
+//     port:5432
+// })
+
 const pool = new Pool({
-    user:'dev',
-    host:'localhost',
-    database:'liberatti',
-    password:'root',
-    port:5432
-})
+    connectionString: process.env.POSTGRES_URL + "?sslmode=require",
+  })
 
 const getUsers = (req, res) => {
     pool.query('select * from users order by userid', (error, results) => {
